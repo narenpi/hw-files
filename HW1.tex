@@ -1,0 +1,168 @@
+\documentclass[name=Narendran, andrewid=narendran, course=eCHT, num=1]{homework}
+\usepackage{subfig,bm}
+\usepackage{pdfpages,mathtools,tikz-cd}
+\usetikzlibrary{graphs}
+\usepackage{tikz}
+\usepackage{hw-shortcuts}
+\usepackage{kbordermatrix}
+\usepackage{quiver}
+\newcommand{\lf}{\bm{L}F}
+\newcommand{\rg}{\bm{R}G}
+\begin{document}
+\problem{1}
+\subproblem{a}
+    \[
+        \begin{tikzcd}
+\bullet \arrow[r, "a"] \arrow[rd, "ba"'] \arrow[rrd, "cba", dashed] & \bullet \arrow[d, "b"'] \arrow[rd, "cb"] &         \\
+                                                                   & \bullet \arrow[r, "c"']                  & \bullet
+\end{tikzcd}
+    \]
+    We have the category as above. If $g, fg\in \mathcal{W}$. Then set $a=f,b=g, h=1$ and from the diagram above we have $f\in \mathcal{W}$. 
+    Similarly for $f, fg \in \mathcal{W}$, set $a=1, b=f, c=g$ to get $g\in \mathcal{W}$. If $f, g\in \mathcal{W}$, by settin $a=f, b=1, c=h$ we get $fg\in \mathcal{W}$. 
+
+    \subproblem{b} The $2$-out-of-$6$ is stronger than the $2$-out-of-$3$ property. 
+    \[
+        \begin{tikzcd}
+\bullet \arrow[r, "f"] \arrow[rd, "gf"'] \arrow[rrd, "hgf", dashed] & \bullet \arrow[d, "g"'] \arrow[rd, "hg"] &         \\
+                                                                   & \bullet \arrow[r, "h"']                  & \bullet
+\end{tikzcd}
+    \] If we take $\mathcal{C}$ to be the catgory above and $\mathcal{W}$ to be morhpisms $gf, hg$ and identity morhpisms. Then $2$-out-of-$3$ does not imply that $f, g, h$ or $hgf\in \mathcal{W}$. 
+\separator
+\problem{2}
+\subproblem{a}
+$\mathcal{W}$ is saturated. We have 
+ \[
+        \begin{tikzcd}
+\bullet \arrow[r, ] \arrow[rd, "L(gf)"'] \arrow[rrd,  dashed] & \bullet \arrow[d] \arrow[rd, "L(hg)"] &         \\
+                                                                   & \bullet \arrow[r]                  & \bullet
+\end{tikzcd}
+    \] with $fg, gf\in \mathcal{W}$. In the category $ho \mathcal{C}$, we have $L(fg), L(hg)$ are isomorphisms. Isomorphisms satisfy the $2$-out-of-$6$ property. So $Lf, Lh, Lg, Lhgf$ are all isomorphisms. Saturated now implies that $f,g,h,hgf\in \mathcal{W}$. 
+\separator
+\problem{3}
+$C \stackrel[F]{G}{\leftrightarrows} D$. Let $\bm{L}F$ be the total left derived functor and $\bm{R}G$ the total right derived functor. So we have 
+\[
+    ho C \stackrel[\bm{L}F]{\bm{R}G}{\leftrightarrows} ho D
+\]
+$F, G$ are adjoint functors, so we have $\eta: 1_C\implies GF, \epsilon: FG\implies 1_D$. Let $\gamma, \delta $ be the localization maps for $C$ and $D$ respectively. 
+\[\begin{tikzcd}
+	C && {ho D} & {ho C} \\
+	& {ho C}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\delta F}", from=1-1, to=1-3]
+	\arrow["\gamma"', from=1-1, to=2-2]
+	\arrow["LF"', from=2-2, to=1-3]
+	\arrow["RG"', from=1-3, to=1-4]
+	\arrow[shift right, curve={height=12pt}, dashed, from=2-2, to=1-4]
+	\arrow["\alpha"', shorten >=3pt, Rightarrow, from=2-2, to=0]
+\end{tikzcd}\]
+
+$\bm{R}G$ is an absolute Kan extension. So $\bm{R}G\bm{L}F$ is a kan extension. Similarly $\bm{L}F\bm{R}G$ is a Kan extension and we have the following diagrams.
+\[\begin{tikzcd}
+	C && {ho C} \\
+	& {ho C}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{RG\delta F}", from=1-1, to=1-3]
+	\arrow["\gamma"', from=1-1, to=2-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "RGLF"{description}, from=2-2, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{1_{hoC}}"', curve={height=30pt}, from=2-2, to=1-3]
+	\arrow["RG\alpha", shorten >=3pt, Rightarrow, from=2-2, to=0]
+	\arrow["\sigma"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=1]
+\end{tikzcd}\] 
+
+\[\begin{tikzcd}
+	D && {ho D} \\
+	& {ho D}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{RG\delta F}", from=1-1, to=1-3]
+	\arrow["\delta"', from=1-1, to=2-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "LFRG"{description}, from=2-2, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{1_{hoD}}"', curve={height=30pt}, from=2-2, to=1-3]
+	\arrow["LF\beta", shorten >=3pt, Rightarrow, from=0, to=2-2]
+	\arrow["\tau"', shorten <=5pt, shorten >=5pt, Rightarrow, from=1, to=2]
+\end{tikzcd}\]
+We also have the following commutative diagrams on the natural transformations
+\[
+    \begin{tikzcd}
+\gamma GF \arrow[r, "\beta F", Rightarrow]                                         & RG\delta F                                   &  & LF\gamma G \arrow[r, "\alpha G", Rightarrow] \arrow[d, "LF\beta"', Rightarrow] & \delta FG \arrow[d, "\delta\epsilon", Rightarrow] \\
+\gamma \arrow[u, "\gamma\eta", Rightarrow] \arrow[r, "\sigma \gamma"', Rightarrow] & RGLF\gamma \arrow[u, "RG\alpha", Rightarrow] &  & LFRG\delta \arrow[r, "\tau\delta"', Rightarrow]                                & \delta                                           
+\end{tikzcd}
+\]
+
+We have $\sigma: 1\implies \bm{R}G\bm{L}F$ and $\tau: \lf\rg\implies 1$. We need to verify the commutativity of the triangle, i.e., 
+\[
+    (\tau \lf)(\lf \sigma)=1\quad (\rg \tau)(\sigma \rg)=1
+\]
+Consider the following Kan extension 
+\[\begin{tikzcd}
+	D && hoC \\
+	& {ho D}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "G\gamma", from=1-1, to=1-3]
+	\arrow["\delta"', from=1-1, to=2-2]
+	\arrow["RG"', from=2-2, to=1-3]
+	\arrow["\beta", shorten <=3pt, Rightarrow, from=0, to=2-2]
+\end{tikzcd}\]
+We will show that $\overbrace{(\rg \tau)(\sigma \rg)}^{\text{nat. tran. from $\rg$ to $\rg$}}(\delta)\beta =\beta$. Then from the universal property of kan extension any other $(\rg, \phi)$ functor, natural transformation pair, $\phi$ factors through $\beta$. So this will show that $(\rg \tau)(\sigma \rg)=1$. 
+\[\begin{tikzcd}
+	D && {ho C} && {ho C} && D && D && {ho C}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{\gamma G}", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "RG\delta"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "1", curve={height=-18pt}, from=1-3, to=1-5]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "RGLF"', curve={height=18pt}, from=1-3, to=1-5]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "FG", curve={height=-18pt}, from=1-7, to=1-9]
+	\arrow[""{name=5, anchor=center, inner sep=0}, "1"', curve={height=18pt}, from=1-7, to=1-9]
+	\arrow[""{name=6, anchor=center, inner sep=0}, "{\gamma G}", curve={height=-18pt}, from=1-9, to=1-11]
+	\arrow[""{name=7, anchor=center, inner sep=0}, "RG\delta"', curve={height=18pt}, from=1-9, to=1-11]
+	\arrow["\beta", shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+	\arrow["\sigma", shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+	\arrow["\varepsilon", shorten <=5pt, shorten >=5pt, Rightarrow, from=4, to=5]
+	\arrow["\beta", shorten <=5pt, shorten >=5pt, Rightarrow, from=6, to=7]
+\end{tikzcd}\]
+From whiskering arguments, we have, 
+\[
+    (\sigma \rg \delta)\beta =(\rg\lf \beta)(\sigma \gamma G )\quad \beta (\sigma G \epsilon)=(\rg\delta \epsilon)(\beta FG)
+\]
+
+\begin{eqnarray}
+    \gamma G \xrightarrow[ ]{\beta }\rg\delta \xrightarrow[ ]{\sigma \rg \delta }\rg\lf\rg\delta \xrightarrow[ ]{\rg\tau \delta }\rg\delta \label{eq1}\\
+ \gamma G \xrightarrow[ ]{\sigma \gamma G }\rg\lf \gamma G     \xrightarrow[ ]{\rg\lf\beta }\rg\lf\rg\delta \xrightarrow[ ]{\rg\tau \delta }\rg\delta\label{eq2}\\
+ \gamma G \xrightarrow[ ]{\sigma \gamma G }\rg\lf\gamma G   \xrightarrow[ ]{\rg\alpha G }\rg\delta FG \xrightarrow[ ]{\rg\delta \epsilon }\rg \delta \label{eq3}\\
+ \gamma G \xrightarrow[ ]{\gamma \eta G }\gamma G FG \xrightarrow[ ]{\beta FG }\rg\delta FG \xrightarrow[ ]{\rg\delta \epsilon }\rg \delta\label{eq4} \\
+ \gamma G \xrightarrow[ ]{\gamma \eta G }\gamma GFG \xrightarrow[ ]{\gamma G \epsilon} \gamma G \xrightarrow[ ]{\beta } \rg\delta \label{eq5}\\
+ \gamma G\xrightarrow[ ]{\beta }\rg\delta\label{eq6}
+\end{eqnarray}
+eq \ref{eq1} to eq \ref{eq2} is whiskering argument. eq\ref{eq3} is obtained by noticing that $$\rg\tau \delta \cdot \rg\lf\beta=\rg(\tau\delta\cdot \lf\beta)=\rg(\delta\epsilon\cdot \alpha G)$$
+eq\ref{eq4} is obtained by using 
+\[
+    (\rg\alpha)( \sigma\gamma)=(\beta F)( \gamma \eta )
+\]Another whiskering gives us eq\ref{eq5} and finally 
+\[
+    \gamma(G\epsilon\cdot\eta G )=\gamma 
+\]
+
+This shows that $\lf \dashv \rg$
+\separator
+\problem{4}
+\subproblem{a}
+
+The commutative diagram at the left below gives unique $\tilde{F }$ such that, $\tilde{F}L=F$. 
+We know from Yoneda lemma, that 
+\[
+     \hom (\mathcal{C}(c,-), F)\cong Fc =\tilde{F }Lc= \hom(ho \mathcal{C}(Lc,-),\tilde{F }c)
+\]
+This gives the diagram at the right. 
+\[
+    \begin{tikzcd}
+\mathcal{C} \arrow[r,"F"] \arrow[d, "L"'] & {\bf Set} & {\mathcal{C}(c,-)} \arrow[r, "\alpha", Rightarrow] \arrow[d, "L"', Rightarrow] & F \\
+ho\mathcal{C} \arrow[ru,"!\tilde{F}"']              &           & {ho \mathcal{C}(Lc,-)} \arrow[ru, "\tilde{\alpha}"', Rightarrow]                         &  
+\end{tikzcd}
+\]
+So given $\alpha $ a natural transformation as above, we have a unique map $\tilde{\alpha }$ such that $\tilde{\alpha }L=\alpha$. But $Lc=c$ on $c\in \mathrm{obj } \mathcal{C}$. This gives us the factorization through $ho \mathcal{C}(c,-)$. 
+
+\subproblem{b}
+Consider $\mathrm{id} : \mathcal{C}(c,-)\implies \mathcal{C}(c,-)$. This set of natural transformations is isomorphic to $\mathcal{C}(c,c)$. We have
+\[
+    \begin{tikzcd}
+{\mathcal{C}(c,d)} \arrow[r, "\mathrm{id}"] \arrow[d, "L"'] & {\mathcal{C}(c,d)} & f \arrow[d, "L"'] \arrow[r]         & f \\
+{ho\mathcal{C}(c,d)} \arrow[ru, "\tilde{\mathrm{id}}"']     &                    & \tilde{f} \arrow[ru, "\tilde{\mathrm{id }}"'] &  
+\end{tikzcd}
+\]
+This is clearly surjective, and it is injective because if $\tilde{f }, \tilde{g }$ go to some $h$, then $\tilde{\mathrm{id} }L (-)=\mathrm{id } (-)$ implies $f=g$ and $\tilde{f }=\tilde{g }$. 
+\separator
+\end{document}
